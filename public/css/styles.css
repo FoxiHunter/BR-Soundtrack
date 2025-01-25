@@ -1,0 +1,186 @@
+/* Основные стили */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: #2b2b2b;
+    color: #e0e0e0;
+    transition: background-color 0.3s, color 0.3s;
+    position: relative;
+  }
+  
+  body.dark-mode {
+    animation: themeChangeDark 0.7s forwards;
+  }
+  
+  body:not(.dark-mode) {
+    animation: themeChangeLight 0.7s forwards;
+  }
+  
+  @keyframes themeChangeDark {
+    0% {
+      background-color: #fff;
+      color: #333;
+    }
+    100% {
+      background-color: #121212;
+      color: #e0e0e0;
+    }
+  }
+  
+  @keyframes themeChangeLight {
+    0% {
+      background-color: #121212;
+      color: #e0e0e0;
+    }
+    100% {
+      background-color: #fff;
+      color: #333;
+    }
+  }
+  
+  .container {
+    text-align: center;
+    background: #333;
+    padding: 30px;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    position: relative;
+  }
+  
+  h1 {
+    color: #fff;
+    font-size: 2em;
+    margin-bottom: 20px;
+  }
+  
+  form {
+    margin-top: 20px;
+  }
+  
+  input {
+    padding: 12px;
+    font-size: 16px;
+    width: 80%;
+    margin-bottom: 15px;
+    border: 1px solid #aaa;
+    border-radius: 4px;
+    background-color: #555;
+    color: #fff;
+    transition: all 0.3s ease;
+  }
+  
+  input:focus {
+    outline: none;
+    border: 1px solid #9b59b6; /* Фиолетовый */
+    box-shadow: 0 0 10px #9b59b6; /* Неоновое свечение */
+    transform: scale(1.1); /* Увеличение панели */
+  }
+  
+  button {
+    padding: 12px 20px;
+    font-size: 16px;
+    color: #fff;
+    background: linear-gradient(180deg, #9b59b6, #8e44ad); /* Градиентный фиолетовый */
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+  }
+  
+  button:active {
+    transform: scale(0.95); /* Уменьшение кнопки при нажатии */
+  }
+  
+  button:hover {
+    background: linear-gradient(180deg, #8e44ad, #9b59b6); /* Изменение направления градиента при наведении */
+  }
+  
+  .mode-toggle {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    background-color: #444;
+    border: none;
+    color: #fff;
+    font-size: 20px;
+    cursor: pointer;
+    border-radius: 50%;
+  }
+  
+  .dark-mode {
+    background-color: #121212;
+    color: #e0e0e0;
+  }
+  
+  .dark-mode .container {
+    background-color: #1f1f1f;
+  }
+  
+  .dark-mode input {
+    background-color: #333;
+  }
+  
+  .dark-mode button {
+    background: linear-gradient(180deg, #8e44ad, #9b59b6); /* Темный градиент фиолетового */
+  }
+  
+  .dark-mode button:hover {
+    background: linear-gradient(180deg, #9b59b6, #8e44ad); /* Градиент при наведении */
+  }
+  
+  body:not(.dark-mode) {
+    background-color: #fff;
+    color: #333;
+  }
+  
+  body:not(.dark-mode) .container {
+    background-color: #f7f7f7;
+  }
+  
+  body:not(.dark-mode) input {
+    background-color: #fff;
+    color: #333;
+    border: 1px solid #ddd;
+  }
+  
+  body:not(.dark-mode) button {
+    background: linear-gradient(180deg, #3498db, #2980b9); /* Голубой градиент для светлого режима */
+  }
+  
+  body:not(.dark-mode) button:hover {
+    background: linear-gradient(180deg, #2980b9, #3498db); /* Изменение направления градиента при наведении */
+  }
+  
+  body:not(.dark-mode) h1 {
+    color: #333; /* Черный текст для светлого режима */
+  }
+  
+  /* Медиазапросы для адаптивности */
+  @media (max-width: 600px) {
+    body {
+      padding: 10px; /* Немного уменьшаем отступы для мобильных устройств */
+    }
+  
+    .container {
+      padding: 20px;
+      width: 100%; /* Чтобы контейнер занимал всю ширину экрана */
+    }
+  
+    h1 {
+      font-size: 1.5em; /* Уменьшаем размер шрифта для мобильных устройств */
+    }
+  
+    input {
+      width: 100%; /* Поле ввода будет занимать всю ширину */
+    }
+  
+    button {
+      width: 100%; /* Кнопка будет растягиваться на всю ширину */
+      padding: 15px; /* Немного увеличим высоту кнопки для удобства на мобильных */
+    }
+  }

@@ -1,0 +1,206 @@
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #121212; /* Темный фон */
+    color: white;
+    margin: 0;
+    padding: 0;
+  }
+  
+  #visualizer {
+    display: block;
+    margin: 20px auto;
+    background: linear-gradient(145deg, #6c398a, #3c1f52);
+    border-radius: 15px;
+    width: 100%;
+    max-width: 800px;
+    height: 200px;
+    box-shadow: 0 10px 30px rgba(247, 2, 255, 0.3);
+    visibility: visible;
+    
+    position: fixed;  /* Фиксируем элемент на экране */
+    top: 0px;         /* Расстояние от верхней границы окна */
+    left: 50%;         /* Центрируем по горизонтали */
+    transform: translateX(-50%); /* Корректируем центрирование */
+    z-index: 1000;     /* Убедимся, что элемент будет поверх других */
+    transition: top 0.3s ease; /* Плавное перемещение */
+}
+
+.blocked {
+  pointer-events: none; /* Блокирует все взаимодействия с элементами */
+  opacity: 0.5; /* Для визуальной индикации блокировки */
+}
+
+body.blocked * {
+  pointer-events: none; /* Блокирует взаимодействие с элементами */
+  opacity: 0.5;
+}
+
+/* Исключаем кнопку из блокировки */
+body.blocked #toggleButton {
+  pointer-events: auto; /* Кнопка должна оставаться доступной */
+  opacity: 1; /* Убираем эффект прозрачности */
+}
+
+/* Стили для кнопки */
+#toggleButton {
+  position: fixed;
+  bottom: 20px;  /* Отступ от нижнего края */
+  right: 20px;   /* Отступ от правого края */
+  width: 60px;   /* Ширина кнопки */
+  height: 60px;  /* Высота кнопки */
+  border-radius: 50%; /* Делает кнопку круглой */
+  background-color: #6c398a; /* Фон кнопки */
+  color: white; /* Цвет текста (эмодзи) */
+  font-size: 30px; /* Размер эмодзи */
+  border: none; /* Без рамки */
+  cursor: pointer; /* Курсор как рука */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); /* Тень для эффекта */
+  transition: transform 0.3s ease; /* Плавное увеличение при наведении */
+}
+
+/* Эффект при наведении на кнопку */
+#toggleButton:hover {
+  transform: scale(1.1); /* Увеличение кнопки */
+}
+
+/* Эффект при нажатии на кнопку */
+#toggleButton:active {
+  transform: scale(1); /* Возвращаем в исходное состояние */
+}
+
+  /* Основной контейнер */
+  .container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 200px;
+  }
+  
+  /* Заголовок */
+  h1 {
+    color: #fff;
+    text-align: center;
+    font-size: 36px;
+    font-weight: 700;
+    text-transform: uppercase;
+    margin-bottom: 20px;
+  }
+  
+  /* Frame для плейлиста */
+  .playlist-frame {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    width: 80%;
+    max-width: 700px;
+    margin-top: 20px;
+    background: linear-gradient(145deg, #3b2a45, #5c3f71); /* Современный градиент */
+    border-radius: 15px;
+    padding: 20px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+    overflow-y: auto;
+    border: 1px solid rgba(255, 255, 255, 0.2); /* Мягкая граница */
+    transition: box-shadow 0.3s ease; /* Добавим плавный переход для фона */
+  }
+  
+  /* Эффект на фоне при наведении */
+  .playlist-frame:hover {
+    box-shadow: 0 10px 40px rgba(255, 0, 255, 0.6); /* Неоновое свечение фона */
+  }
+  
+  /* Стиль для каждой песни */
+  .song {
+    background: linear-gradient(145deg, #5a3d58, #8a4c8f);
+    border-radius: 15px;
+    padding: 15px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    position: relative;
+    width: 90%; 
+    max-width: 600px;
+    min-height: 100px;
+    margin-left: 5%; /* Сдвигаем на 10% от ширины контейнера */
+  }
+  
+  /* Название песни (сейчас оно над фреймом) */
+  .song-title {
+    color: white;
+    font-size: 18px;
+    text-align: center; /* По умолчанию центрируем */
+    margin-bottom: 10px;
+    font-weight: bold;
+    margin-top: 10px;
+    text-transform: uppercase;
+    width: 100%;
+  }
+  
+  /* Эффект при наведении на песню (только на ПК) */
+  @media (min-width: 768px) {
+    .song:hover {
+      transform: scale(1.05);
+      box-shadow: 0 6px 20px rgba(255, 0, 255, 0.6); /* Добавляем неоновое свечение */
+      border: 1px solid #ff00ff; /* Добавляем неоновый бордер */
+    }
+  }
+  
+  /* Название песни внутри фрейма */
+  .song p {
+    color: white;
+    font-size: 16px;
+    text-align: center;
+    margin-bottom: 10px;
+    font-weight: bold;
+  }
+  
+  /* Неоновое обведение при нажатии */
+  .song:active {
+    box-shadow: 0 6px 20px rgba(255, 105, 180, 0.8); /* Мягкое неоновое свечение */
+    border: 1px solid #ff00ff; /* Также неоновая граница */
+  }
+  
+  /* Стиль для кнопок */
+  button {
+    background-color: #6e44b9;
+    color: white;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 5px;
+    margin: 5px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-size: 16px;
+  }
+  
+  /* Эффект на кнопке при наведении */
+  button:hover {
+    background-color: #8e5bcd;
+    transform: scale(1.05);
+  }
+  
+  /* Кнопка для добавления песен */
+  .add-song-button {
+    background: linear-gradient(145deg, #ff5f57, #ff9a8b); /* Градиент */
+    color: white;
+    padding: 15px;
+    font-size: 24px;
+    border-radius: 50%;
+    border: none;
+    cursor: pointer;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+  }
+  
+  /* Эффект на кнопке добавления */
+  .add-song-button:hover {
+    transform: scale(1.1);
+  }
+  
+  .add-song-button:active {
+    transform: scale(1);
+  }

@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Music Player with Visualizer</title>
+  <link rel="stylesheet" href="../css/playlist1.css">
+</head>
+<body>
+  <div class="container">
+    <h1>Songs</h1>
+
+    <button id="toggleButton">🔒</button>
+    
+    <!-- Визуализатор -->
+    <div id="visualizer-wrapper" class="hidden">
+      <canvas id="visualizer" width="800" height="200"></canvas>
+    </div>
+
+    <!-- Фрейм для плейлиста -->
+    <div id="playlist-frame" class="playlist-frame">
+      <!-- Песни добавляются динамически через JS -->
+    </div>
+  </div>
+  <script type="module" src="../js/music.js"></script>
+  <script type="module" src="../js/Prohibition.js"></script>
+</body>
+</html>

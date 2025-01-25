@@ -16,7 +16,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     const code = codeInput.value.trim(); // Получаем значение из поля ввода
     const validCodes = {
-      "9fZ!2qLp@7vXr4mBzT1#d5Dq6sJ8yU": "public/playlists/playlist1.html",
+      "9fZ!2qLp@7vXr4mBzT1#d5Dq6sJ8yU": "/public/playlists/playlist1.html", // Скорректированный путь
     };
 
     if (validCodes[code]) {

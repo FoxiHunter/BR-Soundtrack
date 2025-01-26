@@ -1,27 +1,27 @@
-// Получаем кнопку и body
-const toggleButton = document.getElementById("toggleButton");
+// Получаем body для применения блокировки
 const body = document.body;
 
 // Флаг для отслеживания состояния неприкосновенности
 let isProtected = false;
-let lastClickTime = 0; // Время последнего клика
+let lastTap = 0; // Время последнего клика
 
 // Функция для включения и выключения режима неприкосновенности
-toggleButton.addEventListener("click", function() {
+document.body.addEventListener("touchend", function(event) {
   const currentTime = new Date().getTime();
-  
-  // Проверяем, было ли время между кликами меньше 500ms (для мобильных)
-  if (currentTime - lastClickTime < 500) {
-    // Если двойной клик, то отключаем защиту
-    isProtected = false;
-    body.classList.remove("blocked");
-    toggleButton.textContent = "🔒";
-  } else {
-    // Если обычный клик, то включаем защиту
-    isProtected = true;
-    body.classList.add("blocked");
-    toggleButton.textContent = "🚫"; // Меняем эмодзи на символ запрета
-  }
+  const tapLength = currentTime - lastTap;
 
-  lastClickTime = currentTime; // Сохраняем время последнего клика
+  // Если два клика меньше чем за 500ms (для мобильных)
+  if (tapLength < 500 && tapLength > 0) {
+    // Переключаем состояние защиты
+    isProtected = !isProtected;
+    
+    // Добавляем или удаляем класс блокировки
+    if (isProtected) {
+      body.classList.add("blocked");
+    } else {
+      body.classList.remove("blocked");
+    }
+  }
+  
+  lastTap = currentTime; // Обновляем время последнего клика
 });

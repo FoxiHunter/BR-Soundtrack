@@ -100,31 +100,18 @@ body {
     background: linear-gradient(180deg, #8e44ad, #9b59b6); /* Изменение направления градиента при наведении */
   }
   
-.mode-toggle {
-  position: fixed;
-  top: 20px;
-  right: 20px;
-  background-color: #444;
-  border: none;
-  color: #fff;
-  font-size: 24px;
-  padding: 12px;
-  border-radius: 50%;
-  cursor: pointer;
-  z-index: 100;
-  transition: all 0.3s ease;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
-}
-
-.mode-toggle:hover {
-  background-color: #555;
-  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.4);
-}
-
-.mode-toggle:active {
-  transform: scale(0.95); /* Уменьшение кнопки при нажатии */
-}
-
+  .mode-toggle {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    background-color: #444;
+    border: none;
+    color: #fff;
+    font-size: 20px;
+    cursor: pointer;
+    border-radius: 50%;
+  }
+  
   .dark-mode {
     background-color: #121212;
     color: #e0e0e0;
@@ -174,14 +161,10 @@ body {
   }
   
   /* Медиазапросы для адаптивности */
-@media (max-width: 600px) {
-  .mode-toggle {
-    top: 15px;
-    right: 15px;
-    font-size: 22px;
-    padding: 10px;
-  }
-}
+  @media (max-width: 600px) {
+    body {
+      padding: 10px; /* Немного уменьшаем отступы для мобильных устройств */
+    }
   
     .container {
       padding: 20px;

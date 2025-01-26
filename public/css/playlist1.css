@@ -44,14 +44,14 @@ body.blocked #toggleButton {
 /* Стили для кнопки */
 #toggleButton {
   position: fixed;
-  bottom: 5vh;  /* Отступ от нижнего края в процентах от высоты экрана */
-  right: 5vw;   /* Отступ от правого края в процентах от ширины экрана */
-  width: 10vw;   /* Ширина кнопки, 10% от ширины экрана */
-  height: 10vw;  /* Высота кнопки, пропорциональная ширине */
+  bottom: 10px;  /* Отступ от нижнего края */
+  right: 10px;   /* Отступ от правого края */
+  width: 60px;   /* Ширина кнопки */
+  height: 60px;  /* Высота кнопки */
   border-radius: 50%; /* Делает кнопку круглой */
   background-color: #6c398a; /* Фон кнопки */
   color: white; /* Цвет текста (эмодзи) */
-  font-size: 5vw; /* Размер текста, пропорционален ширине экрана */
+  font-size: 30px; /* Размер эмодзи */
   border: none; /* Без рамки */
   cursor: pointer; /* Курсор как рука */
   display: flex;
@@ -59,6 +59,7 @@ body.blocked #toggleButton {
   align-items: center;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); /* Тень для эффекта */
   transition: transform 0.3s ease; /* Плавное увеличение при наведении */
+  z-index: 1001; /* Чтобы кнопка была поверх фрейма */
 }
 
 /* Эффект при наведении на кнопку */
@@ -69,7 +70,7 @@ body.blocked #toggleButton {
 /* Эффект при нажатии на кнопку */
 #toggleButton:active {
   transform: scale(1); /* Возвращаем в исходное состояние */
-}
+}    
 
 /* Основной контейнер */
   .container {
@@ -89,22 +90,23 @@ body.blocked #toggleButton {
     margin-bottom: 20px;
   }
   
-  /* Frame для плейлиста */
-  .playlist-frame {
-    display: flex;
-    flex-direction: column;
-    gap: 15px;
-    width: 80%;
-    max-width: 700px;
-    margin-top: 20px;
-    background: linear-gradient(145deg, #3b2a45, #5c3f71); /* Современный градиент */
-    border-radius: 15px;
-    padding: 20px;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
-    overflow-y: auto;
-    border: 1px solid rgba(255, 255, 255, 0.2); /* Мягкая граница */
-    transition: box-shadow 0.3s ease; /* Добавим плавный переход для фона */
-  }
+/* Стили для контейнера с песнями */
+.playlist-frame {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  width: 80%;
+  max-width: 700px;
+  margin-top: 20px;
+  background: linear-gradient(145deg, #3b2a45, #5c3f71); /* Современный градиент */
+  border-radius: 15px;
+  padding: 20px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+  overflow-y: auto;
+  border: 1px solid rgba(255, 255, 255, 0.2); /* Мягкая граница */
+  transition: box-shadow 0.3s ease; /* Добавим плавный переход для фона */
+  z-index: 1; /* Низкий z-index, чтобы кнопка была сверху */
+}
   
   /* Эффект на фоне при наведении */
   .playlist-frame:hover {

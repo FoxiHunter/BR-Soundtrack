@@ -183,24 +183,6 @@ body.blocked #toggleButton {
     transform: scale(1.05);
   }
   
-  /* Кнопка для добавления песен */
-  .add-song-button {
-    background: linear-gradient(145deg, #ff5f57, #ff9a8b); /* Градиент */
-    color: white;
-    padding: 15px;
-    font-size: 24px;
-    border-radius: 50%;
-    border: none;
-    cursor: pointer;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
-  }
-  
-  /* Эффект на кнопке добавления */
-  .add-song-button:hover {
-    transform: scale(1.1);
-  }
-  
   .add-song-button:active {
     transform: scale(1);
   }

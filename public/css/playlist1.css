@@ -25,6 +25,52 @@ body {
     transition: top 0.3s ease; /* Плавное перемещение */
 }
 
+.blocked {
+  pointer-events: none; /* Блокирует все взаимодействия с элементами */
+  opacity: 0.5; /* Для визуальной индикации блокировки */
+}
+
+body.blocked * {
+  pointer-events: none; /* Блокирует взаимодействие с элементами */
+  opacity: 0.5;
+}
+
+/* Исключаем кнопку из блокировки */
+body.blocked #toggleButton {
+  pointer-events: auto; /* Кнопка должна оставаться доступной */
+  opacity: 1; /* Убираем эффект прозрачности */
+}
+
+/* Стили для кнопки */
+#toggleButton {
+  position: fixed;
+  bottom: 20px;  /* Отступ от нижнего края */
+  right: 20px;   /* Отступ от правого края */
+  width: 60px;   /* Ширина кнопки */
+  height: 60px;  /* Высота кнопки */
+  border-radius: 50%; /* Делает кнопку круглой */
+  background-color: #6c398a; /* Фон кнопки */
+  color: white; /* Цвет текста (эмодзи) */
+  font-size: 30px; /* Размер эмодзи */
+  border: none; /* Без рамки */
+  cursor: pointer; /* Курсор как рука */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); /* Тень для эффекта */
+  transition: transform 0.3s ease; /* Плавное увеличение при наведении */
+}
+
+/* Эффект при наведении на кнопку */
+#toggleButton:hover {
+  transform: scale(1.1); /* Увеличение кнопки */
+}
+
+/* Эффект при нажатии на кнопку */
+#toggleButton:active {
+  transform: scale(1); /* Возвращаем в исходное состояние */
+}
+
 /* Основной контейнер */
   .container {
     display: flex;

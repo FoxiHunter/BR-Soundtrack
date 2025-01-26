@@ -1,28 +1,28 @@
 body {
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background-color: #121212; /* Темный фон */
-    color: white;
-    margin: 0;
-    padding: 0;
-  }
-  
-  #visualizer {
-    display: block;
-    margin: 20px auto;
-    background: linear-gradient(145deg, #6c398a, #3c1f52);
-    border-radius: 15px;
-    width: 100%;
-    max-width: 800px;
-    height: 200px;
-    box-shadow: 0 10px 30px rgba(247, 2, 255, 0.3);
-    visibility: visible;
-    
-    position: fixed;  /* Фиксируем элемент на экране */
-    top: 0px;         /* Расстояние от верхней границы окна */
-    left: 50%;         /* Центрируем по горизонтали */
-    transform: translateX(-50%); /* Корректируем центрирование */
-    z-index: 1000;     /* Убедимся, что элемент будет поверх других */
-    transition: top 0.3s ease; /* Плавное перемещение */
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background-color: #121212; /* Темный фон */
+  color: white;
+  margin: 0;
+  padding: 0;
+}
+
+#visualizer {
+  display: block;
+  margin: 20px auto;
+  background: linear-gradient(145deg, #6c398a, #3c1f52);
+  border-radius: 15px;
+  width: 100%;
+  max-width: 800px;
+  height: 200px;
+  box-shadow: 0 10px 30px rgba(247, 2, 255, 0.3);
+  visibility: visible;
+
+  position: fixed;  /* Фиксируем элемент на экране */
+  top: 0px;         /* Расстояние от верхней границы окна */
+  left: 50%;         /* Центрируем по горизонтали */
+  transform: translateX(-50%); /* Корректируем центрирование */
+  z-index: 1000;     /* Убедимся, что элемент будет поверх других */
+  transition: top 0.3s ease; /* Плавное перемещение */
 }
 
 .blocked {
@@ -71,118 +71,161 @@ body.blocked #toggleButton {
   transform: scale(1); /* Возвращаем в исходное состояние */
 }
 
-  /* Основной контейнер */
+/* Основной контейнер */
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 200px;
+}
+
+h1 {
+  color: #fff;
+  text-align: center;
+  font-size: 36px;
+  font-weight: 700;
+  text-transform: uppercase;
+  margin-bottom: 20px;
+}
+
+.playlist-frame {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  width: 80%;
+  max-width: 700px;
+  margin-top: 20px;
+  background: linear-gradient(145deg, #3b2a45, #5c3f71); /* Современный градиент */
+  border-radius: 15px;
+  padding: 20px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+  overflow-y: auto;
+  border: 1px solid rgba(255, 255, 255, 0.2); /* Мягкая граница */
+  transition: box-shadow 0.3s ease; /* Добавим плавный переход для фона */
+}
+
+.playlist-frame:hover {
+  box-shadow: 0 10px 40px rgba(255, 0, 255, 0.6); /* Неоновое свечение фона */
+}
+
+.song {
+  background: linear-gradient(145deg, #5a3d58, #8a4c8f);
+  border-radius: 15px;
+  padding: 15px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  position: relative;
+  width: 90%; 
+  max-width: 600px;
+  min-height: 100px;
+  margin-left: 5%; /* Сдвигаем на 10% от ширины контейнера */
+}
+
+.song-title {
+  color: white;
+  font-size: 18px;
+  text-align: center; /* По умолчанию центрируем */
+  margin-bottom: 10px;
+  font-weight: bold;
+  margin-top: 10px;
+  text-transform: uppercase;
+  width: 100%;
+}
+
+.song p {
+  color: white;
+  font-size: 16px;
+  text-align: center;
+  margin-bottom: 10px;
+  font-weight: bold;
+}
+
+.song:active {
+  box-shadow: 0 6px 20px rgba(255, 105, 180, 0.8); /* Мягкое неоновое свечение */
+  border: 1px solid #ff00ff; /* Также неоновая граница */
+}
+
+button {
+  background-color: #6e44b9;
+  color: white;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 5px;
+  margin: 5px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-size: 16px;
+}
+
+button:hover {
+  background-color: #8e5bcd;
+  transform: scale(1.05);
+}
+
+/* Responsive Media Queries */
+
+/* For small devices (e.g., mobile phones) */
+@media (max-width: 600px) {
+  #visualizer {
+    max-width: 100%;
+    height: 150px; /* Adjusting height */
+  }
+
   .container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    margin-top: 200px;
+    margin-top: 100px; /* Reduce top margin */
   }
-  
-  /* Заголовок */
+
   h1 {
-    color: #fff;
-    text-align: center;
-    font-size: 36px;
-    font-weight: 700;
-    text-transform: uppercase;
-    margin-bottom: 20px;
+    font-size: 24px; /* Smaller font size */
   }
-  
-  /* Frame для плейлиста */
+
   .playlist-frame {
-    display: flex;
-    flex-direction: column;
-    gap: 15px;
-    width: 80%;
-    max-width: 700px;
-    margin-top: 20px;
-    background: linear-gradient(145deg, #3b2a45, #5c3f71); /* Современный градиент */
-    border-radius: 15px;
-    padding: 20px;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
-    overflow-y: auto;
-    border: 1px solid rgba(255, 255, 255, 0.2); /* Мягкая граница */
-    transition: box-shadow 0.3s ease; /* Добавим плавный переход для фона */
+    width: 90%;
+    padding: 15px; /* Reduce padding */
   }
-  
-  /* Эффект на фоне при наведении */
-  .playlist-frame:hover {
-    box-shadow: 0 10px 40px rgba(255, 0, 255, 0.6); /* Неоновое свечение фона */
-  }
-  
-  /* Стиль для каждой песни */
+
   .song {
-    background: linear-gradient(145deg, #5a3d58, #8a4c8f);
-    border-radius: 15px;
-    padding: 15px;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-    position: relative;
-    width: 90%; 
-    max-width: 600px;
-    min-height: 100px;
-    margin-left: 5%; /* Сдвигаем на 10% от ширины контейнера */
-  }
-  
-  /* Название песни (сейчас оно над фреймом) */
-  .song-title {
-    color: white;
-    font-size: 18px;
-    text-align: center; /* По умолчанию центрируем */
-    margin-bottom: 10px;
-    font-weight: bold;
-    margin-top: 10px;
-    text-transform: uppercase;
     width: 100%;
+    padding: 10px; /* Adjust padding */
+    min-height: 80px; /* Adjust minimum height */
   }
-  
-  /* Эффект при наведении на песню (только на ПК) */
-  @media (min-width: 768px) {
-    .song:hover {
-      transform: scale(1.05);
-      box-shadow: 0 6px 20px rgba(255, 0, 255, 0.6); /* Добавляем неоновое свечение */
-      border: 1px solid #ff00ff; /* Добавляем неоновый бордер */
-    }
+
+  #toggleButton {
+    width: 50px;
+    height: 50px;
+    font-size: 24px;
   }
-  
-  /* Название песни внутри фрейма */
-  .song p {
-    color: white;
-    font-size: 16px;
-    text-align: center;
-    margin-bottom: 10px;
-    font-weight: bold;
-  }
-  
-  /* Неоновое обведение при нажатии */
-  .song:active {
-    box-shadow: 0 6px 20px rgba(255, 105, 180, 0.8); /* Мягкое неоновое свечение */
-    border: 1px solid #ff00ff; /* Также неоновая граница */
-  }
-  
-  /* Стиль для кнопок */
+
   button {
-    background-color: #6e44b9;
-    color: white;
-    border: none;
-    padding: 8px 16px;
-    border-radius: 5px;
-    margin: 5px;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    font-size: 16px;
+    font-size: 14px; /* Smaller button font size */
   }
-  
-  /* Эффект на кнопке при наведении */
-  button:hover {
-    background-color: #8e5bcd;
-    transform: scale(1.05);
+}
+
+/* For tablets and small laptops */
+@media (max-width: 768px) {
+  .container {
+    margin-top: 150px; /* Adjust for tablets */
   }
-  
-  .add-song-button:active {
-    transform: scale(1);
+
+  .playlist-frame {
+    width: 85%;
   }
+
+  .song {
+    width: 95%;
+    padding: 12px;
+  }
+
+  h1 {
+    font-size: 28px; /* Slightly smaller for tablets */
+  }
+
+  #toggleButton {
+    width: 55px;
+    height: 55px;
+    font-size: 26px;
+  }
+}

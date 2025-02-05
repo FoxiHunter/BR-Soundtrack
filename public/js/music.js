@@ -9,9 +9,9 @@ document.addEventListener('DOMContentLoaded', () => {
     { title: 'Song 7', file: '../uploads/MXCCREE.mp3' },
     { title: 'Song 8', file: '../uploads/NewJeans.mp3' },
     { title: 'Song 9', file: '../uploads/ZALOR TREVA.mp3' },
-    { title: 'Song 10', file: '../uploads/ZALOR hammali.mp3' },
-    { title: 'Song 11', file: '../uploads/ZALOR Nomi.mp3' },
-    { title: 'Song 12', file: '../uploads/ZALOR Vermillion.mp3' },
+    { title: 'Song 10', file: '../uploads/hammali.mp3' },
+    { title: 'Song 11', file: '../uploads/Nomi.mp3' },
+    { title: 'Song 12', file: '../uploads/Vermillion.mp3' },
   ];
 
   const playlistFrame = document.getElementById('playlist-frame');
@@ -144,3 +144,4 @@ ctx.fillStyle = `rgb(${r}, ${g}, ${b})`;
       audioContext.resume();
     }
   });
+});

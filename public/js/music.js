@@ -144,4 +144,3 @@ ctx.fillStyle = `rgb(${r}, ${g}, ${b})`;
       audioContext.resume();
     }
   });
-});

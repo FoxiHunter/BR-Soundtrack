@@ -15,18 +15,15 @@ document.addEventListener('DOMContentLoaded', () => {
   ];
 
   const playlistFrame = document.getElementById('playlist-frame');
-  let currentAudio = null; // Текущий аудиофайл
-  let isAudioPlaying = false;  // Статус воспроизведения
+  let currentAudio = null;
+  let lastPlayedIndex = -1;
 
-  // Получаем единственный визуализатор
+  // Визуализатор
   const visualizerWrapper = document.getElementById('visualizer-wrapper');
   const canvas = document.getElementById('visualizer');
   const ctx = canvas.getContext('2d');
-  let audioContext;
-  let analyser;
-  let dataArray;
+  let audioContext, analyser, dataArray;
 
-  // Создание фрейма для песни
   function createSongFrame(song, index) {
     const songFrame = document.createElement('div');
     songFrame.classList.add('song');
@@ -41,17 +38,12 @@ document.addEventListener('DOMContentLoaded', () => {
     title.classList.add('song-title');
     title.textContent = song.title;
 
-    // Обработчик на воспроизведение / паузу
     audio.addEventListener('play', () => {
       if (currentAudio && currentAudio !== audio) {
-        currentAudio.pause();  // Останавливаем текущую песню
-        currentAudio.currentTime = 0; // Сбрасываем позицию
+        currentAudio.pause();
+        currentAudio.currentTime = 0;
       }
-
       currentAudio = audio;
-      isAudioPlaying = true;
-
-      // Инициализация контекста аудио для визуализатора
       initAudioContext(audio);
       visualizerWrapper.classList.remove('hidden');
     });
@@ -59,22 +51,17 @@ document.addEventListener('DOMContentLoaded', () => {
     audio.addEventListener('pause', () => {
       if (audio.currentTime === 0) {
         currentAudio = null;
-        isAudioPlaying = false;
-
-        // Скрываем визуализатор
         visualizerWrapper.classList.add('hidden');
       }
     });
 
-    // Обработчик на завершение песни
     audio.addEventListener('ended', () => {
       playNextSong();
-      visualizerWrapper.classList.add('hidden'); // Скрываем визуализатор, когда песня заканчивается
+      visualizerWrapper.classList.add('hidden');
     });
 
     songFrame.appendChild(audio);
     songFrame.appendChild(title);
-
     return songFrame;
   }
 
@@ -83,14 +70,21 @@ document.addEventListener('DOMContentLoaded', () => {
     playlistFrame.appendChild(songFrame);
   });
 
-  // Функция для воспроизведения следующей песни
+  function getRandomSongIndex() {
+    let randomIndex;
+    do {
+      randomIndex = Math.floor(Math.random() * songs.length);
+    } while (randomIndex === lastPlayedIndex);
+    lastPlayedIndex = randomIndex;
+    return randomIndex;
+  }
+
   function playNextSong() {
-    const nextSongIndex = (currentAudio.dataset.index + 1) % songs.length;
+    const nextSongIndex = getRandomSongIndex();
     const nextAudio = playlistFrame.children[nextSongIndex].querySelector('audio');
     nextAudio.play();
   }
 
-  // Инициализация аудио контекста для визуализатора
   function initAudioContext(audio) {
     if (!audioContext) {
       audioContext = new (window.AudioContext || window.webkitAudioContext)();
@@ -100,20 +94,16 @@ document.addEventListener('DOMContentLoaded', () => {
       dataArray = new Uint8Array(bufferLength);
     }
 
-    // Создаем новый источник для текущего аудио
     const source = audioContext.createMediaElementSource(audio);
     source.connect(analyser);
     analyser.connect(audioContext.destination);
 
-    // Запуск визуализатора
     drawVisualizer();
   }
 
-  // Отрисовка визуализатора
   function drawVisualizer() {
     requestAnimationFrame(drawVisualizer);
     analyser.getByteFrequencyData(dataArray);
-
     ctx.clearRect(0, 0, canvas.width, canvas.height);
 
     const barWidth = canvas.width / (dataArray.length * 2);
@@ -124,11 +114,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
     for (let i = 0; i < dataArray.length; i++) {
       barHeight = dataArray[i] / 2;
-      const r = 1000;
-      const g = 0 + barHeight;
-      const b = 1000;
-
-ctx.fillStyle = `rgb(${r}, ${g}, ${b})`;
+      const r = 255;
+      const g = barHeight;
+      const b = 255;
+      ctx.fillStyle = `rgb(${r}, ${g}, ${b})`;
 
       ctx.fillRect(xLeft, canvas.height - barHeight, barWidth - 2, barHeight);
       ctx.fillRect(xRight, canvas.height - barHeight, barWidth - 2, barHeight);
@@ -138,8 +127,7 @@ ctx.fillStyle = `rgb(${r}, ${g}, ${b})`;
     }
   }
 
-  // Активация контекста по клику (для Chrome/Firefox)
-  document.body.addEventListener('click', () => {
+document.body.addEventListener('click', () => {
     if (audioContext && audioContext.state === 'suspended') {
       audioContext.resume();
     }
